@@ -4,9 +4,10 @@ export default function NotFound(){
 
     return(
         <div>
-            <h1>Page Not Found</h1>
+            <h1>404 Error : Page Not Found</h1>
 
-            <Link to="/" className="bg-[f0ad38] p-1" >Go back to home</Link>
+            <Link className="bg-[#f0ad38] p-1 " to="/">Go back to home</Link>
+            
         </div>
     )
 }
