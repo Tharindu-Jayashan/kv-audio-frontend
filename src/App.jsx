@@ -3,7 +3,6 @@ import './App.css'
 import Adminpage from './pages/admin/adminPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './pages/homePage';
-import Testing from './components/testing';
 import LoginPage from './pages/login/login';
 import { Toaster } from 'react-hot-toast';
 
@@ -13,9 +12,9 @@ function App() {
  
       <BrowserRouter>
       <Toaster/>
-           <Routes>
-            <Route path='/login' element={<LoginPage/>} />
-               <Route path="/admin" element={<Adminpage/>} />
+           <Routes path="/*">
+               <Route path='/login' element={<LoginPage/>} />
+               <Route path="/admin/*" element={<Adminpage/>} />
                <Route path="/*" element={<Homepage/>} />
            </Routes>
       </BrowserRouter>

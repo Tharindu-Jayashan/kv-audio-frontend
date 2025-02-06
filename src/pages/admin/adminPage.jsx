@@ -1,29 +1,49 @@
-import { MdSpaceDashboard } from "react-icons/md";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
+import { SiTemporal } from "react-icons/si";
+import { FaRegUserCircle } from "react-icons/fa";
+import { Link, Route, Routes } from "react-router-dom";
+import AdminitemsPage from "./adminItemsPage";
 
 export default function Adminpage(){
 
     return(
-        <div className='w-full h-screen flex'>
+      
+      <div className='w-full h-screen flex'>
 
-        <div className='w-[400px] h-full bg-green-200'>
+        <div className='w-[200px] h-full bg-green-200'>
 
-        <button className='w-full h-[40px] text-[25px] font-bold bg-red-400 flex justify-center items-center'>
-            <MdSpaceDashboard/>
-            Dashboard
-        </button>
-        <button className='w-full h-[30px] text-[15px] font-bold flex justify-center items-center'>
-          <TbBrandBooking/>
-          Booking
-        </button>
-        <button className='w-full h-[30px] text-[15px] font-bold flex justify-center items-center'>
-          <TbBrandBooking/>
-          Booking
-        </button>
+          <button className='w-full h-[40px] text-[25px] font-bold bg-red-400 flex justify-center items-center'>
+              <MdOutlineDashboardCustomize/>
+              Dashboard
+          </button>
+
+          <Link to="/bookings" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+              <TbBrandBooking/>
+               Booking
+          </Link> 
+        
+          <Link to="/admin/adminitems" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+              <SiTemporal/>
+              Items
+          </Link>
+        
+          <Link to="/admin/users" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center' >
+              <FaRegUserCircle/>
+              Users
+          </Link>
 
         </div>
 
-        <div className='w-full h-full bg-red-900'>
+        <div className='w-[calc(100vw-200px)] h-full bg-blue-100'>
+
+          <Routes path="/*">
+              <Route path="/adminitems" element={<AdminitemsPage/>}/>
+              <Route path="/bookings" element={<h1>Bookings page</h1>}/>
+
+          </Routes>
+
+
         </div>
 
       </div>
