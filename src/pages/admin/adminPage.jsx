@@ -4,6 +4,7 @@ import { SiTemporal } from "react-icons/si";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminitemsPage from "./adminItemsPage";
+import AddItemsPage from "./addItemsPage";
 
 export default function Adminpage(){
 
@@ -18,7 +19,7 @@ export default function Adminpage(){
               Dashboard
           </button>
 
-          <Link to="/bookings" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+          <Link to="/admin/bookings" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
               <TbBrandBooking/>
                Booking
           </Link> 
@@ -40,7 +41,7 @@ export default function Adminpage(){
           <Routes path="/*">
               <Route path="/adminitems" element={<AdminitemsPage/>}/>
               <Route path="/bookings" element={<h1>Bookings page</h1>}/>
-
+              <Route path="/items/add" element={<AddItemsPage/>}/>
           </Routes>
 
 
