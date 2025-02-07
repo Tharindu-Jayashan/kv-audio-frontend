@@ -1,12 +1,56 @@
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function AddItemsPage() {
   const [productKey, setProductKey] = useState("");
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [productPrice, setProductPrice] = useState(0);
   const [productCategory, setProductCategory] = useState("");
   const [productDimensions, setProductDimensions] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const navigate = useNavigate();
+
+  async function handleAddItem(){
+
+    console.log(
+      productKey,productName,productPrice,productCategory,productDimensions,productDescription
+    )
+    const token = localStorage.getItem("token");
+
+    if(token){
+        try{
+            const result = await axios.post("http://localhost:3000/api/products",{
+
+              key : productKey,
+              name : productName,
+              category : productCategory,
+              dimensions : productDimensions,
+              price : productPrice,
+              description : productDescription
+            },
+            {
+              headers : {
+                Authorization : "Bearer " + token
+              }
+            }
+            )
+            toast.success(result.data.message)
+            navigate("/admin/adminitems")
+          }
+      
+        catch(err){
+          toast.error(err.response.data.error)
+        } 
+
+    }else{
+    toast.error("Please login first")
+    }
+    
+
+  }
+
 
   return (
     <div className="w-full h-full flex flex-col items-center p-4">
@@ -32,7 +76,7 @@ export default function AddItemsPage() {
         <input
           onChange={(e) => setProductPrice(e.target.value)}
           value={productPrice}
-          type="text"
+          type="number"
           placeholder="Price"
           className="mb-2 p-2 border rounded"
         />
@@ -63,9 +107,10 @@ export default function AddItemsPage() {
           className="mb-2 p-2 border rounded"
         />
 
-        <button className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
+        <button onClick={handleAddItem} className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
           Add
         </button>
+        <button onClick={()=>{navigate("/admin/adminitems")}} className="bg-red-500 text-white p-2 rounded mt-2">Cancel</button>
       </div>
     </div>
   );
