@@ -24,7 +24,7 @@ export default function Adminpage(){
                Booking
           </Link> 
         
-          <Link to="/admin/adminitems" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+          <Link to="/admin/items" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
               <SiTemporal/>
               Items
           </Link>
@@ -39,7 +39,7 @@ export default function Adminpage(){
         <div className='w-[calc(100vw-200px)] h-full bg-blue-100'>
 
           <Routes path="/*">
-              <Route path="/adminitems" element={<AdminitemsPage/>}/>
+              <Route path="/items" element={<AdminitemsPage/>}/>
               <Route path="/bookings" element={<h1>Bookings page</h1>}/>
               <Route path="/items/add" element={<AddItemsPage/>}/>
           </Routes>

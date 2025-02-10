@@ -37,7 +37,7 @@ export default function AddItemsPage() {
             }
             )
             toast.success(result.data.message)
-            navigate("/admin/adminitems")
+            navigate("/admin/items")
           }
       
         catch(err){
@@ -110,7 +110,7 @@ export default function AddItemsPage() {
         <button onClick={handleAddItem} className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
           Add
         </button>
-        <button onClick={()=>{navigate("/admin/adminitems")}} className="bg-red-500 text-white p-2 rounded mt-2">Cancel</button>
+        <button onClick={()=>{navigate("/admin/items")}} className="bg-red-500 text-white p-2 rounded mt-2">Cancel</button>
       </div>
     </div>
   );
