@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { CiCirclePlus } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -26,11 +26,37 @@ export default function AdminItemsPage() {
     },[itemsLoaded]);
 
     const handleDelete = (key) => {
-       
+
+        try{
+            if(window.confirm("Are you sure you want to delete this item?") ){
+
+                setItems(items.filter((item) => item.key !== key));
+                const token = localStorage.getItem("token");
+
+                axios.delete(`http://localhost:3000/api/products/${key}` ,{
+                headers: { Authorization: "Bearer " + token },
+    
+            })
+            .then((res)=>{
+                console.log(res);
+                setItemsLoaded(false)
+    
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+            }
+        }catch(err){
+            console.log(err)
+        
+        }
     };
 
     return (
-        <div className="w-full h-full p-6">
+        <div className="w-full h-full p-6 relative flex items-center flex-col">
+
+            {!itemsLoaded && <div className="border-4 my-4 border-b-green-500 rounded-full animate-spin bg-0 w-[50px] h-[50px]"></div>}
+
             {itemsLoaded && <div className="overflow-x-auto">
                 <table className="w-full border-collapse border border-gray-300 shadow-md">
                     <thead className="bg-gray-800 text-white">
@@ -54,8 +80,10 @@ export default function AdminItemsPage() {
                                 <td className="p-3 border">{product.dimensions}</td>
                                 <td className="p-3 border">{product.availability ? "Available" : "Not Available"}</td>
                                 <td className="p-3 border flex justify-center space-x-2">
-                                    <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Update</button>
-                                    <button onClick={() => handleDelete(product.key)} className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded">Delete</button>
+
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Edit</button>
+                                   
+                                <button onClick={() => handleDelete(product.key)} className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded">Delete</button>
                                 </td>
                             </tr>
                         ))}
