@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function AdminItemsPage() {
     const [items, setItems] = useState([]);
     const [itemsLoaded, setItemsLoaded] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(!itemsLoaded){
@@ -75,13 +76,14 @@ export default function AdminItemsPage() {
                             <tr key={product.key} className="text-center border-b hover:bg-gray-100">
                                 <td className="p-3 border">{product.key}</td>
                                 <td className="p-3 border">{product.name}</td>
-                                <td className="p-3 border">${product.price}</td>
+                                <td className="p-3 border">{product.price}</td>
                                 <td className="p-3 border">{product.category}</td>
                                 <td className="p-3 border">{product.dimensions}</td>
                                 <td className="p-3 border">{product.availability ? "Available" : "Not Available"}</td>
                                 <td className="p-3 border flex justify-center space-x-2">
 
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Edit</button>
+                                <button onClick={()=> navigate(`/admin/items/edit` , {state : product} 
+                                                )} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded">Edit</button>
                                    
                                 <button onClick={() => handleDelete(product.key)} className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded">Delete</button>
                                 </td>

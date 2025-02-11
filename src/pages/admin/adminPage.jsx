@@ -5,6 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminitemsPage from "./adminItemsPage";
 import AddItemsPage from "./addItemsPage";
+import UpdateItemsPage from "./updateItemsPage";
 
 
 export default function Adminpage(){
@@ -43,6 +44,7 @@ export default function Adminpage(){
               <Route path="/items" element={<AdminitemsPage/>}/>
               <Route path="/bookings" element={<h1>Bookings page</h1>}/>
               <Route path="/items/add" element={<AddItemsPage/>}/>
+              <Route path="/items/edit" element={<UpdateItemsPage/>}/>
           </Routes>
 
 
