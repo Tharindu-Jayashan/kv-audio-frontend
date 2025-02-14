@@ -13,7 +13,7 @@ export default function AdminItemsPage() {
     useEffect(()=>{
         if(!itemsLoaded){
             const token = localStorage.getItem("token");
-            axios.get("http://localhost:3000/api/products",{headers : {Authorization : "Bearer " + token }}).then((res)=>{
+            axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`,{headers : {Authorization : "Bearer " + token }}).then((res)=>{
                 console.log(res);
                 setItems(res.data.products || []);
 
@@ -34,7 +34,7 @@ export default function AdminItemsPage() {
                 setItems(items.filter((item) => item.key !== key));
                 const token = localStorage.getItem("token");
 
-                axios.delete(`http://localhost:3000/api/products/${key}` ,{
+                axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}` ,{
                 headers: { Authorization: "Bearer " + token },
     
             })
@@ -54,13 +54,13 @@ export default function AdminItemsPage() {
     };
 
     return (
-        <div className="w-full h-full p-6 relative flex items-center flex-col">
+        <div className="w-full h-full p-6 relative flex items-center flex-col bg-white">
 
             {!itemsLoaded && <div className="border-4 my-4 border-b-green-500 rounded-full animate-spin bg-0 w-[50px] h-[50px]"></div>}
 
             {itemsLoaded && <div className="overflow-x-auto">
                 <table className="w-full border-collapse border border-gray-300 shadow-md">
-                    <thead className="bg-gray-800 text-white">
+                    <thead className="bg-[#9b67cc] text-white">
                         <tr>
                             <th className="p-3 border">Key</th>
                             <th className="p-3 border">Name</th>

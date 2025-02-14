@@ -14,24 +14,24 @@ export default function Adminpage(){
       
       <div className='w-full h-screen flex'>
 
-        <div className='w-[200px] h-full bg-green-200'>
+        <div className='w-[200px] h-full bg-[#9b67cc]'>
 
-          <button className='w-full h-[40px] text-[25px] font-bold bg-red-400 flex justify-center items-center'>
+          <button className='w-full h-[40px] text-[25px] text-white font-bold bg-[#9b67cc] flex justify-center items-center'>
               <MdOutlineDashboardCustomize/>
               Dashboard
           </button>
 
-          <Link to="/admin/bookings" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+          <Link to="/admin/bookings" className='w-full h-[30px] text-[20px] text-white font-bold flex justify-center items-center'>
               <TbBrandBooking/>
                Booking
           </Link> 
         
-          <Link to="/admin/items" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center'>
+          <Link to="/admin/items" className='w-full h-[30px] text-[20px] text-white font-bold flex justify-center items-center'>
               <SiTemporal/>
               Items
           </Link>
         
-          <Link to="/admin/users" className='w-full h-[30px] text-[20px] font-bold flex justify-center items-center' >
+          <Link to="/admin/users" className='w-full h-[30px] text-[20px] text-white font-bold flex justify-center items-center' >
               <FaRegUserCircle/>
               Users
           </Link>
