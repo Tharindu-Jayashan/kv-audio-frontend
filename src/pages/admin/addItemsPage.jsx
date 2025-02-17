@@ -42,6 +42,7 @@ export default function AddItemsPage() {
       
         catch(err){
           toast.error(err.response.data.error)
+          console.log(err)
         } 
 
     }else{
