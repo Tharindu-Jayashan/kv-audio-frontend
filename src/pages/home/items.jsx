@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
 import ProductCard from "../../components/productCard";
+import toast from "react-hot-toast";
 
 export default function Items(){
 
