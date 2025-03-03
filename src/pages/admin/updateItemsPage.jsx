@@ -14,7 +14,7 @@ export default function UpdateItemsPage() {
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimensions, setProductDimensions] = useState(location.state.dimensions);
   const [productDescription, setProductDescription] = useState(location.state.description); 
-  const [productImages, setProductImages] = useState([location.state.image]);
+  const [productImages, setProductImages] = useState([]);
   const navigate = useNavigate();
 
   async function handleUpdateItem(){
