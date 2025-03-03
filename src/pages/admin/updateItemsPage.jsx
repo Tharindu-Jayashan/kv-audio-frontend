@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {  useNavigate, useLocation } from "react-router-dom";
+import meadiaUpload from "../../utils/mediaUpload";
 
 export default function UpdateItemsPage() {
 
@@ -13,9 +14,29 @@ export default function UpdateItemsPage() {
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimensions, setProductDimensions] = useState(location.state.dimensions);
   const [productDescription, setProductDescription] = useState(location.state.description); 
+  const [productImages, setProductImages] = useState([location.state.image]);
   const navigate = useNavigate();
 
-  async function handleAddItem(){
+  async function handleUpdateItem(){
+
+    let updatingImages = location.state.image
+
+    if(productImages.length > 0){
+
+          const promises = []
+      
+          for(let i=0; i<productImages.length; i++){
+            console.log(productImages[i])
+            const promise = meadiaUpload(productImages[i]);
+            promises.push(promise)
+      
+          }
+
+          updatingImages = await Promise.all(promises)
+            
+    }
+
+
 
     console.log(
       productKey,productName,productPrice,productCategory,productDimensions,productDescription
@@ -24,6 +45,7 @@ export default function UpdateItemsPage() {
 
     if(token){
         try{
+
             const result = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/`+productKey ,{
 
               key : productKey,
@@ -31,7 +53,8 @@ export default function UpdateItemsPage() {
               category : productCategory,
               dimensions : productDimensions,
               price : productPrice,
-              description : productDescription
+              description : productDescription,
+              image : updatingImages
             },
             {
               headers : {
@@ -111,7 +134,13 @@ export default function UpdateItemsPage() {
           className="mb-2 p-2 border rounded"
         />
 
-        <button onClick={handleAddItem} className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
+        <input 
+          type="file"
+          multiple
+          onChange={(e)=>{setProductImages(e.target.files)}}
+        />
+
+        <button onClick={handleUpdateItem} className="bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
           Update
         </button>
         <button onClick={()=>{navigate("/admin/items")}} className="bg-red-500 text-white p-2 rounded mt-2">Cancel</button>
