@@ -6,6 +6,7 @@ import Home from "./home/home";
 import Gallery from "./home/gallery";
 import Items from "./home/items";
 import NotFound from "./home/notFound";
+import ProductOverview from "./home/productOverview";
 
 export default function Homepage() {
   return (
@@ -18,6 +19,7 @@ export default function Homepage() {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/gallery" element={<Gallery/>} />
           <Route path="/items" element={<Items/>} />
+          <Route path="/product/:key" element={<ProductOverview/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
 
