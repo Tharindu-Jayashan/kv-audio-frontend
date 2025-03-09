@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import RegisterPage from './pages/register/register';
 import Testing from './components/testing';
 
+
 function App() {
 
   return (
