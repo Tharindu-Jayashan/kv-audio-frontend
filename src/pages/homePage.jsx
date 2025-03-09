@@ -7,6 +7,8 @@ import Gallery from "./home/gallery";
 import Items from "./home/items";
 import NotFound from "./home/notFound";
 import ProductOverview from "./home/productOverview";
+import BookingPage from "./home/booking";
+
 
 export default function Homepage() {
   return (
@@ -19,6 +21,7 @@ export default function Homepage() {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/gallery" element={<Gallery/>} />
           <Route path="/items" element={<Items/>} />
+          <Route path='/booking' element={<BookingPage/>} />
           <Route path="/product/:key" element={<ProductOverview/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
