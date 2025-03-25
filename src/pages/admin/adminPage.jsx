@@ -7,6 +7,7 @@ import AdminitemsPage from "./adminItemsPage";
 import AddItemsPage from "./addItemsPage";
 import UpdateItemsPage from "./updateItemsPage";
 import AdminUsersPage from "./adminUsersPage";
+import AdminOrdersPage from "./adminBookingPage";
 
 
 export default function Adminpage(){
@@ -44,7 +45,7 @@ export default function Adminpage(){
           <Routes path="/*">
               <Route path="/items" element={<AdminitemsPage/>}/>
               <Route path="/users" element={<AdminUsersPage/>}/>
-              <Route path="/bookings" element={<h1>Bookings page</h1>}/>
+              <Route path="/bookings" element={<AdminOrdersPage/>}/>
               <Route path="/items/add" element={<AddItemsPage/>}/>
               <Route path="/items/edit" element={<UpdateItemsPage/>}/>
           </Routes>
