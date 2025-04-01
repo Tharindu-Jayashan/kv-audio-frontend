@@ -25,6 +25,29 @@ export default function AdminOrdersPage() {
         }
     }, [loading]);
 
+    function handleOrderStatusChange(orderId, Status) {
+        const token = localStorage.getItem("token");
+        axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`, 
+            { 
+                status: Status 
+            }, 
+
+            {
+                headers: { 
+                    Authorization: "Bearer " + token 
+                },
+
+            }
+        ).then((res) => {
+            console.log(res);
+            setLoading(true);
+            setModalOpen(false);
+        }).catch((err) => {
+            console.error(err);
+            setLoading(true);
+        });
+    }
+
     return (
         <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">Admin Booking Page</h2>
@@ -59,7 +82,7 @@ export default function AdminOrdersPage() {
                                     <td className="border border-gray-300 p-2">{new Date(order.endingDate).toLocaleDateString()}</td>
                                     <td className="border border-gray-300 p-2">Rs. {order.totalAmount.toFixed(2)}</td>
                                     <td className="border border-gray-300 p-2">{new Date(order.orderDate).toLocaleDateString()}</td>
-                                    <td className="border border-gray-300 p-2">{order.isApproved ? "Yes" : "No"}</td>
+                                    <td className="border border-gray-300 p-2">{order.status}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -83,11 +106,21 @@ export default function AdminOrdersPage() {
                                 <p><span className="font-semibold">End Date : </span>{new Date(activeOrder.endingDate).toLocaleDateString()}</p>
                                 <p><span className="font-semibold">Total Amount : </span>Rs. {activeOrder.totalAmount.toFixed(2)}</p>
                                 <p><span className="font-semibold">Order Date : </span>{new Date(activeOrder.orderDate).toLocaleDateString()}</p>
-                                <p><span className="font-semibold">Approvel Status : </span>{activeOrder.isApproved ? "Yes" : "No"}</p>
+                                <p><span className="font-semibold">Approvel Status : </span>{activeOrder.status}</p>
+                            </div>
+                            <div className="w-full flex justify-center items-center my-4">
+
+                                <button onClick={()=>{
+                                    handleOrderStatusChange(activeOrder.orderId, "Approved");
+                                }} className="flex bg-green-500 text-white px-4 py-2 rounded-md ">Approve</button>
+
+                                <button onClick={()=>{
+                                    handleOrderStatusChange(activeOrder.orderId, "Rejected");
+                                }} className="flex bg-red-500 text-white px-4 py-2 rounded-md ml-4">Reject</button>
                             </div>
 
                             <div className="overflow-x-auto">
-                            <table className="w-full border-collapse border border-gray-300">
+                            <table className="w-full border-collapse border border-gray-300 my-4">
                                 <thead>
                                     <tr className="bg-accent">
                                         <th className="border border-gray-300 px-4 py-2">Product</th>
